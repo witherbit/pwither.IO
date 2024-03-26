@@ -9,6 +9,8 @@
     <Description>Библиотека для работы с частями файлов, файлами, директориями и сжатыми пакетами</Description>
     <Copyright>Witherbit 2024</Copyright>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/witherbit/pwither.IO</PackageProjectUrl>
+    <PackageIcon>wbax.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -18,6 +20,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <IsAotCompatible>True</IsAotCompatible>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Tanukii\Downloads\wbax.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="pwither.formatter" Version="1.0.0" />
