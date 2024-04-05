@@ -89,41 +89,43 @@ namespace pwither.IO.Utils
 
         public static byte[] PackagerToByteArray(this Packager obj)
         {
-            using (var ms = new MemoryStream())
-            {
-                var bf = new BitBinaryFormatter();
-                bf.SurrogateSelector = new ConverterSelector();
-                bf.Control.IsSerializableHandlers = new IsSerializableHandlers();
-                bf.Control.IsSerializableHandlers.Handlers.OfType<SerializeAllowedTypes>().Single().AllowedTypes.Add(typeof(object));
-                var b = new AllowedTypesBinder();
-                b.AddAllowedType(typeof(Packager));
-                b.AddAllowedType(typeof(PackagerInfo));
-                b.AddAllowedType(typeof(Package));
-                b.AddAllowedType(typeof(FilePart));
-                bf.Binder = b;
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
+            return BitSerializer.Serialize(obj);
+            //using (var ms = new MemoryStream())
+            //{
+            //    var bf = new BitBinaryFormatter();
+            //    bf.SurrogateSelector = new ConverterSelector();
+            //    bf.Control.IsSerializableHandlers = new IsSerializableHandlers();
+            //    bf.Control.IsSerializableHandlers.Handlers.OfType<SerializeAllowedTypes>().Single().AllowedTypes.Add(typeof(object));
+            //    var b = new AllowedTypesBinder();
+            //    b.AddAllowedType(typeof(Packager));
+            //    b.AddAllowedType(typeof(PackagerInfo));
+            //    b.AddAllowedType(typeof(Package));
+            //    b.AddAllowedType(typeof(FilePart));
+            //    bf.Binder = b;
+            //    bf.Serialize(ms, obj);
+            //    return ms.ToArray();
+            //}
         }
 
         public static Packager ByteArrayToPackager(this byte[] arrBytes)
         {
-            using (var ms = new MemoryStream())
-            {
-                ms.Write(arrBytes, 0, arrBytes.Length);
-                ms.Seek(0, SeekOrigin.Begin);
-                var bf = new BitBinaryFormatter();
-                bf.SurrogateSelector = new ConverterSelector();
-                bf.Control.IsSerializableHandlers = new IsSerializableHandlers();
-                bf.Control.IsSerializableHandlers.Handlers.OfType<SerializeAllowedTypes>().Single().AllowedTypes.Add(typeof(object));
-                var b = new AllowedTypesBinder();
-                b.AddAllowedType(typeof(Packager));
-                b.AddAllowedType(typeof(PackagerInfo));
-                b.AddAllowedType(typeof(Package));
-                b.AddAllowedType(typeof(FilePart));
-                bf.Binder = b;
-                return (Packager)bf.Deserialize(ms);
-            }
+            return BitSerializer.Deserialize<Packager>(arrBytes);
+            //using (var ms = new MemoryStream())
+            //{
+            //    ms.Write(arrBytes, 0, arrBytes.Length);
+            //    ms.Seek(0, SeekOrigin.Begin);
+            //    var bf = new BitBinaryFormatter();
+            //    bf.SurrogateSelector = new ConverterSelector();
+            //    bf.Control.IsSerializableHandlers = new IsSerializableHandlers();
+            //    bf.Control.IsSerializableHandlers.Handlers.OfType<SerializeAllowedTypes>().Single().AllowedTypes.Add(typeof(object));
+            //    var b = new AllowedTypesBinder();
+            //    b.AddAllowedType(typeof(Packager));
+            //    b.AddAllowedType(typeof(PackagerInfo));
+            //    b.AddAllowedType(typeof(Package));
+            //    b.AddAllowedType(typeof(FilePart));
+            //    bf.Binder = b;
+            //    return (Packager)bf.Deserialize(ms);
+            //}
         }
     }
 }
